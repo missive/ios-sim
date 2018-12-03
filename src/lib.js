@@ -264,7 +264,7 @@ function withInjectedEnvironmentVariablesToProcess(process, envVariables, action
 // replace hyphens in iPad Pro name which differ in 'Device Types' and 'Devices'
 function filterDeviceName(deviceName) {
     // replace hyphens in iPad Pro name which differ in 'Device Types' and 'Devices'
-    if (deviceName.indexOf('iPad Pro') === 0) {
+    if (/^iPad Pro/i.test(deviceName)) {
         return deviceName.replace(/\-/g, ' ').trim();
     }
     // replace ʀ in iPhone Xʀ

@@ -111,7 +111,7 @@ function findRuntimesGroupByDeviceProperty(list, deviceProperty, availableOnly, 
 }
 
 function findAvailableRuntime(list, device_name) {
-    device_name = device_name.toLowerCase()
+    device_name = device_name.toLowerCase();
 
     var all_druntimes = findRuntimesGroupByDeviceProperty(list, 'name', true, { lowerCase: true });
     var druntime = all_druntimes[ filterDeviceName(device_name) ] || all_druntimes[ device_name ];
@@ -269,7 +269,7 @@ function filterDeviceName(deviceName) {
     }
     // replace ʀ in iPhone Xʀ
     if (deviceName.indexOf('ʀ') > -1) {
-      return deviceName.replace('ʀ', 'R')
+        return deviceName.replace('ʀ', 'R');
     }
     return deviceName;
 }

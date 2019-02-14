@@ -84,7 +84,10 @@ function findRuntimesGroupByDeviceProperty(list, deviceProperty, availableOnly, 
     var available_runtimes = {};
 
     list.runtimes.forEach(function(runtime) {
-        available_runtimes[ runtime.name ] = (runtime.availability === '(available)');
+        available_runtimes[ runtime.identifier ] = {
+          name: runtime.name,
+          available: (runtime.availability === '(available)'),
+        };
     });
 
     Object.keys(list.devices).forEach(function(deviceGroup) {
@@ -97,12 +100,16 @@ function findRuntimesGroupByDeviceProperty(list, deviceProperty, availableOnly, 
             if (!runtimes[devicePropertyValue]) {
                 runtimes[devicePropertyValue] = [];
             }
-            if (availableOnly) {
-                if (available_runtimes[deviceGroup]) {
-                    runtimes[devicePropertyValue].push(deviceGroup);
-                }
-            } else {
-                runtimes[devicePropertyValue].push(deviceGroup);
+
+            var runtime = available_runtimes[deviceGroup];
+            if (runtime) {
+              if (availableOnly) {
+                  if (runtime.available) {
+                      runtimes[devicePropertyValue].push(runtime.name);
+                  }
+              } else {
+                  runtimes[devicePropertyValue].push(runtime.name);
+              }
             }
         });
     });

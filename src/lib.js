@@ -200,9 +200,9 @@ function getDeviceFromDeviceTypeId(devicetypeid) {
         ret_obj.runtime = findAvailableRuntime(list, ret_obj.name);
     }
 
-    // prepend iOS to runtime version, if necessary
-    if (ret_obj.runtime.indexOf('OS') === -1) {
-        ret_obj.runtime = util.format('iOS %s', ret_obj.runtime);
+    // prepend com.apple.CoreSimulator.SimRuntime.iOS- to runtime version, if necessary
+    if (ret_obj.runtime.indexOf('com.apple.CoreSimulator.SimRuntime') === -1) {
+        ret_obj.runtime = util.format('com.apple.CoreSimulator.SimRuntime.iOS-%s', ret_obj.runtime.replace(/\./g, '-'));
     }
 
     // now find the deviceid (by runtime and devicename)
